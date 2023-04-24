@@ -1,7 +1,10 @@
 
-FROM node:16-alpine
+FROM node:14-bullseye-slim
 # Installing libvips-dev for sharp Compatibility
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
+RUN apt update && apt install -yq --no-install-recommends\
+        build-essential gcc autoconf automake \
+        zlib1g-dev libpng-dev nasm bash libvips-dev \
+        curl
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/
